@@ -11,10 +11,36 @@ import { ConsequenceScene } from "@/components/story/ConsequenceScene";
 import { AudioToggle } from "@/components/story/AudioToggle";
 import { Reflection } from "@/components/story/Reflection";
 import { motion, useScroll } from "framer-motion";
+import { type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+/**
+ * Editorial section: illustration above, then chapter label + headline + subtitle.
+ * Used for the calm "page-like" scenes that match the reference layout.
+ */
+function ChapterSection({
+  illustration,
+  chapter,
+  headline,
+  subtitle,
+}: {
+  illustration: ReactNode;
+  chapter: string;
+  headline: string[];
+  subtitle?: string;
+}) {
+  return (
+    <section className="relative w-full bg-background py-24 md:py-32">
+      <div className="mx-auto flex max-w-3xl flex-col items-center px-6">
+        <div className="relative mb-12 h-64 w-full md:h-80">{illustration}</div>
+        <SceneText chapter={chapter} headline={headline} subtitle={subtitle} />
+      </div>
+    </section>
+  );
+}
 
 function Index() {
   const { scrollYProgress } = useScroll();
@@ -29,98 +55,80 @@ function Index() {
 
       <AudioToggle />
 
-      {/* 1. Opening — Earth */}
+      {/* I. ONE WORLD — Opening Earth (full-bleed cinematic) */}
       <Scene background={<EarthScene />}>
         <SceneText
           tone="dark"
-          size="xl"
-          lines={[
-            "No stranger walks this earth.",
-            "No country lies beyond our own.",
-          ]}
+          chapter="I. One World"
+          headline={["No stranger walks this earth,", "no country lies beyond our own."]}
+          subtitle="A meditation on what we share — air, soil, sky, and the quiet weight of being human together."
         />
-        <p className="mt-12 text-center text-sm uppercase tracking-[0.3em] text-background/60">
+        <p className="mt-12 text-center text-xs uppercase tracking-[0.3em] text-background/60">
           Scroll to begin
         </p>
       </Scene>
 
-      {/* 2. Unity */}
-      <Scene background={<UnityScene />}>
-        <SceneText
-          size="lg"
-          lines={["Beneath every uniform,", "a single body breathes."]}
-        />
-      </Scene>
+      {/* II. ONE BODY — editorial */}
+      <ChapterSection
+        illustration={<UnityScene />}
+        chapter="II. One Body"
+        headline={["Beneath all uniforms,", "a single body breathes."]}
+        subtitle="Like ours: the same warmth in the chest, the same breath drawn from the same wide air."
+      />
 
-      {/* 3. Shared landscapes */}
-      <Scene background={<LandscapeScene />}>
-        <SceneText
-          size="lg"
-          lines={[
-            "We walk the same hills,",
-            "drink from the same rivers,",
-            "rest beneath the same sun.",
-          ]}
-        />
-      </Scene>
+      {/* III. ONE EARTH — editorial */}
+      <ChapterSection
+        illustration={<LandscapeScene />}
+        chapter="III. One Earth"
+        headline={["They, too, are aware of sun and air and water,", "fed by peaceful harvests."]}
+        subtitle="The same hills hold our footsteps. The same rivers carry us forward."
+      />
 
-      {/* 4. Peace vs War split */}
+      {/* IV. PEACE & WAR — full-bleed split */}
       <Scene background={<PeaceWarScene />}>
         <SceneText
           tone="dark"
-          size="lg"
-          lines={[
-            "Fed by the harvest of peace,",
-            "starved by the long winter of war.",
-          ]}
+          chapter="IV. Peace & War"
+          headline={["Fed by the harvest of peace,", "starved by the long winter of war."]}
+          subtitle="Two seasons of one human story — and we choose, every day, which to plant."
         />
       </Scene>
 
-      {/* 5. Common humanity */}
-      <Scene background={<HumanityScene />}>
-        <SceneText
-          size="lg"
-          lines={[
-            "Hands that build, eyes that wake,",
-            "a heart that keeps the same time.",
-          ]}
-        />
-      </Scene>
+      {/* V. ONE HEART — editorial */}
+      <ChapterSection
+        illustration={<HumanityScene />}
+        chapter="V. One Heart"
+        headline={["Hands that build, eyes that wake,", "a heart that keeps the same time."]}
+        subtitle="Strip away the language, the borders, the names — and the body answers in the same simple rhythm."
+      />
 
-      {/* 6. Love vs Hate */}
+      {/* VI. LOVE & HATE — full-bleed transition */}
       <Scene background={<LoveHateScene />}>
         <SceneText
           tone="dark"
-          size="lg"
-          lines={[
-            "When we hate, the world dims.",
-            "When we love, the light returns.",
-          ]}
+          chapter="VI. Love & Hate"
+          headline={["When we hate,", "the world dims."]}
+          subtitle="When we love, the light returns — to the room, to the street, to the country we have not yet visited."
         />
       </Scene>
 
-      {/* 7. Consequence */}
+      {/* VII. CONSEQUENCE — full-bleed dark */}
       <Scene background={<ConsequenceScene />}>
         <SceneText
           tone="dark"
-          size="lg"
-          lines={[
-            "Our fires of dust and rage",
-            "wound the very air we share.",
-          ]}
+          chapter="VII. Consequence"
+          headline={["Our fires of dust and rage", "wound the very air we share."]}
+          subtitle="The smoke does not stop at any border. Neither does the grief."
         />
       </Scene>
 
-      {/* 8. Conclusion */}
+      {/* VIII. REMEMBER — closing Earth + reflection */}
       <Scene background={<EarthScene calm />}>
         <SceneText
           tone="dark"
-          size="xl"
-          lines={[
-            "Remember —",
-            "no one is foreign,",
-            "no land unknown.",
-          ]}
+          chapter="VIII. Remember"
+          headline={["No one is foreign.", "No land unknown."]}
+          subtitle="Carry this back into the day. Look once at a stranger and see, instead, a neighbor you had not yet met."
         />
         <Reflection />
         <p className="mt-16 text-center text-xs uppercase tracking-[0.3em] text-background/50">
