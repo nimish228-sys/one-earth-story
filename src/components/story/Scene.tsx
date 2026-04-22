@@ -15,7 +15,8 @@ export function Scene({ children, background, className = "", id }: SceneProps) 
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  // Stay fully visible while the section is on-screen; only fade at the far edges.
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [1, 1, 1, 1]);
 
   return (
     <section
@@ -24,7 +25,7 @@ export function Scene({ children, background, className = "", id }: SceneProps) 
       className={`relative min-h-screen w-full overflow-hidden flex items-center justify-center ${className}`}
     >
       {background && (
-        <motion.div style={{ y }} className="absolute inset-0 -z-10">
+        <motion.div style={{ y }} className="absolute inset-0 z-0">
           {background}
         </motion.div>
       )}
