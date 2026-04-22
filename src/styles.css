@@ -216,5 +216,4 @@
 .story-scroll::-webkit-scrollbar-thumb {
   background: oklch(0.6 0.05 60 / 0.4);
   border-radius: 999px;
-  }
 }
