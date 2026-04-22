@@ -9,10 +9,14 @@ export function LoveHateScene() {
 
   return (
     <div ref={ref} className="absolute inset-0">
-      <motion.div style={{ opacity: light }} className="absolute inset-0"
-        style={{ background: "radial-gradient(ellipse at center, oklch(0.92 0.08 60), oklch(0.7 0.1 40))" } as never} />
-      <motion.div style={{ opacity: dark }} className="absolute inset-0"
-        style={{ background: "radial-gradient(ellipse at center, oklch(0.25 0.04 280), oklch(0.08 0.02 280))" } as never} />
+      <motion.div
+        className="absolute inset-0"
+        style={{ opacity: light, background: "radial-gradient(ellipse at center, oklch(0.92 0.08 60), oklch(0.7 0.1 40))" }}
+      />
+      <motion.div
+        className="absolute inset-0"
+        style={{ opacity: dark, background: "radial-gradient(ellipse at center, oklch(0.25 0.04 280), oklch(0.08 0.02 280))" }}
+      />
 
       <div className="absolute inset-0 flex items-center justify-center gap-12 md:gap-32 px-6">
         {/* hand reaching */}
